@@ -1,3 +1,4 @@
+// Dummy Image data
 export const IMAGEDATA = [
   { src: { original:'https://images.pexels.com/photos/248797/pexels-photo-248797.jpeg'} },
   { src: { original: 'https://images.pexels.com/photos/459225/pexels-photo-459225.jpeg' } },
