@@ -58,6 +58,3 @@ react-native run-android
 
 ### Run typescript compiler.
 `yarn tsc`
-
-### Run Test
-`yarn test`
