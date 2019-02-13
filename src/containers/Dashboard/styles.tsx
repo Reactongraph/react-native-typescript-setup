@@ -1,20 +1,20 @@
 import { StyleSheet } from 'react-native';
-import Common  from "../../utils/common";
+import Common  from 'src/utils/common';
 
 const styles = StyleSheet.create({
   container: {
     flex: 1
   },
   wrapperStyle: {
-    backgroundColor: Common.redColor,
+    backgroundColor: Common.darkGray,
     flex: 1,
-    justifyContent: "space-between",
-    alignItems: "center",
-    flexDirection: "row"
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    flexDirection: 'row'
   },
   titleTextStyle: {
     color: Common.whiteColor,
-    fontWeight: "bold",
+    fontWeight: 'bold',
     marginLeft: 10,
     marginRight: 10
   },
@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
     marginLeft: 10
   },
   imageDataView: {
-    flex: 15
+    flex: 12
   }
 });
 

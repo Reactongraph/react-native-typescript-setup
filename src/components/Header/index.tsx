@@ -1,7 +1,6 @@
 import React from 'react';
 import { View, Text } from 'react-native';
 import Button from '../Button';
-
 interface Header {
   onPress: () => void;
   titleTextStyle: Object,
