@@ -25,6 +25,7 @@ export default class Login extends Component<Props, State> {
     if (email && password) {
       const storedData = await helperFunctions.getLocalData('credential');
       if (storedData.email === email && storedData.password === password) {
+        helperFunctions.storeData('isLoggedIn', 'true')
         helperFunctions.resetNavigation(this, 'Dashboard', null);
       } else {
         alert('Email or password is not correct.')
