@@ -28,7 +28,7 @@ git clone < project-url.git >
 - Launch ``` yarn ``` command in a terminal opened in the project folder.
 > This command will look into the *package.json* file and install all the dependencies listed here.
 
-- Install react-native-cli globally on your computer
+- Install [react-native-cli](https://facebook.github.io/react-native/docs/getting-started.html) globally on your computer
 ```
 yarn global add react-native-cli
 ```
