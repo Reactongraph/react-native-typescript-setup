@@ -5,6 +5,7 @@ const helperFunctions = new Helper();
 
 export default class SplashScreen extends Component {
   async componentDidMount() {
+    // Verify user is already logged in or not. And navigate accordingly.
     const storedData = await helperFunctions.getLocalData('credential');
     if (storedData) {
       helperFunctions.resetNavigation(this, 'Dashboard', null);

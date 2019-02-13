@@ -24,6 +24,7 @@ export default class Dashboard extends Component<Props, State > {
     this.setState({ email: storedData.email })
   }
 
+  // Logout from app
   handleLogout = () => {
     helperFunctions.resetNavigation(this, 'Login', null);
   };

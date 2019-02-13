@@ -22,7 +22,7 @@ const Form: React.SFC<FormProps> = props => (
       onChangeText={props.onEmailChangeText}
       value={props.email}
       keyboardType='email-address'
-      placeholder='Email or Mobile Number'
+      placeholder='Email'
     />
     <InputField
       onChangeText={props.onPasswordChangeText}
