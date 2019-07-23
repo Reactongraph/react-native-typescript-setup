@@ -9,22 +9,20 @@ import SignUpScreen from 'src/containers/SignUp';
 console.disableYellowBox = true;
 
 const AppNavigator = StackNavigator(
-  {
-    Dashboard: { screen: DashboardScreen },
-    Login: { screen: LoginScreen },
-    Splash: { screen: SplashScreen },
-    SignUp: { screen: SignUpScreen}
-  },
-  {
-    initialRouteName: 'Splash',
-    headerMode: 'none',
-  },
+    {
+        Dashboard: { screen: DashboardScreen },
+        Login: { screen: LoginScreen },
+        Splash: { screen: SplashScreen },
+        SignUp: { screen: SignUpScreen }
+    },
+    {
+        initialRouteName: 'Splash',
+        headerMode: 'none'
+    }
 );
 
 export default class App extends Component {
-  render() {
-    return (
-        <AppNavigator />
-    );
-  }
+    render() {
+        return <AppNavigator />;
+    }
 }
