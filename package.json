@@ -1,51 +1,40 @@
 {
-  "name": "reactNativeTypeScriptExample",
+  "name": "newSamplePoc",
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "start": "node node_modules/react-native/local-cli/cli.js start",
+    "android": "react-native run-android",
+    "ios": "react-native run-ios",
+    "start": "react-native start",
     "test": "jest",
-    "tsc": "tsc --watch"
+    "lint": "eslint ."
   },
   "dependencies": {
-    "@types/node": "^11.9.0",
-    "react": "16.6.3",
-    "react-native": "0.58.4",
-    "react-native-firebase": "^5.2.2",
-    "react-native-swiper": "^1.5.14",
-    "react-navigation": "^1.5.8"
+    "@react-native-masked-view/masked-view": "^0.2.7",
+    "@react-navigation/native": "^6.0.12",
+    "@react-navigation/stack": "^6.2.3",
+    "react": "17.0.2",
+    "react-native": "0.66.0",
+    "react-native-firebase": "^5.6.0",
+    "react-native-gesture-handler": "^2.6.0",
+    "react-native-safe-area-context": "^4.3.3",
+    "react-native-screens": "^3.17.0",
+    "react-native-swiper": "^1.6.0",
+    "react-native-typescript-transformer": "^1.2.13",
+    "react-navigation": "^4.4.4",
+    "typescript": "^4.8.2"
   },
   "devDependencies": {
-    "@types/jest": "^24.0.0",
-    "@types/react": "^16.8.2",
-    "@types/react-native": "^0.57.35",
-    "@types/react-test-renderer": "^16.8.0",
-    "babel-core": "^7.0.0-bridge.0",
-    "babel-jest": "24.1.0",
-    "jest": "24.1.0",
-    "metro-react-native-babel-preset": "0.51.1",
-    "react-addons-test-utils": "^15.6.2",
-    "react-native-typescript-transformer": "^1.2.11",
-    "react-test-renderer": "16.6.3",
-    "ts-jest": "^23.10.5",
-    "typescript": "^3.3.3"
+    "@babel/core": "^7.12.9",
+    "@babel/runtime": "^7.12.5",
+    "@react-native-community/eslint-config": "^2.0.0",
+    "babel-jest": "^26.6.3",
+    "eslint": "7.14.0",
+    "jest": "^26.6.3",
+    "metro-react-native-babel-preset": "^0.66.2",
+    "react-test-renderer": "17.0.2"
   },
   "jest": {
-    "preset": "react-native",
-    "moduleFileExtensions": [
-      "ts",
-      "tsx",
-      "js"
-    ],
-    "transform": {
-      "^.+\\.(js)$": "<rootDir>/node_modules/babel-jest",
-      "\\.(ts|tsx)$": "<rootDir>/node_modules/ts-jest/preprocessor.js"
-    },
-    "testRegex": "(/__tests__/.*|\\.(test|spec))\\.(ts|tsx|js)$",
-    "testPathIgnorePatterns": [
-      "\\.snap$",
-      "<rootDir>/node_modules/"
-    ],
-    "cacheDirectory": ".jest/cache"
+    "preset": "react-native"
   }
 }

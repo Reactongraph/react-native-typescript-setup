@@ -1,28 +1,28 @@
-import React, { Component } from 'react';
-import { StackNavigator } from 'react-navigation';
+import React from 'react';
+import {createStackNavigator} from '@react-navigation/stack';
+import DashboardScreen from './containers/Dashboard';
+import {NavigationContainer} from '@react-navigation/native';
+import LoginScreen from './containers/Login';
+import SplashScreen from './containers/SplashScreen';
+import SignUpScreen from './containers/SignUp';
 
-import DashboardScreen from 'src/containers/Dashboard';
-import LoginScreen from 'src/containers/Login';
-import SplashScreen from 'src/containers/SplashScreen';
-import SignUpScreen from 'src/containers/SignUp';
+const Stack = createStackNavigator();
 
-console.disableYellowBox = true;
-
-const AppNavigator = StackNavigator(
-    {
-        Dashboard: { screen: DashboardScreen },
-        Login: { screen: LoginScreen },
-        Splash: { screen: SplashScreen },
-        SignUp: { screen: SignUpScreen }
-    },
-    {
-        initialRouteName: 'Splash',
-        headerMode: 'none'
-    }
-);
-
-export default class App extends Component {
-    render() {
-        return <AppNavigator />;
-    }
+function AppNavigator(props) {
+  return (
+    <NavigationContainer {...props}>
+      <Stack.Navigator initialRouteName="Splash">
+        <Stack.Screen name="Dashboard" component={DashboardScreen} />
+        <Stack.Screen name="Login" component={LoginScreen} />
+        <Stack.Screen name="Splash" component={SplashScreen} />
+        <Stack.Screen name="SignUp" component={SignUpScreen} />
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
 }
+
+const App = () => {
+  return <AppNavigator />;
+};
+
+export default App;

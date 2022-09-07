@@ -1,20 +1,35 @@
-import React, { Component } from 'react';
-import { View } from 'react-native';
-import Helper from 'src/utils/helper';
-const helperFunctions = new Helper();
+import React, { useEffect } from "react";
+import { View, AsyncStorage } from "react-native";
 
-export default class SplashScreen extends Component {
-    async componentDidMount() {
-        // Verify user is already logged in or not. And navigate accordingly.
-        const storedData = await helperFunctions.getLocalData('isLoggedIn');
-        if (storedData) {
-            helperFunctions.resetNavigation(this, 'Dashboard', null);
-        } else {
-            helperFunctions.resetNavigation(this, 'Login', null);
-        }
-    }
+const SplashScreen = (props) => {
+  const resetNavigation = (navigation: any) => {
+    props.navigation.navigate(navigation);
+  };
 
-    render() {
-        return <View />;
+  const getLocalData = async (key: string) => {
+    try {
+      const value = await AsyncStorage.getItem(key);
+      if (value) {
+        return JSON.parse(value);
+      }
+    } catch (error) {
+      console.warn(error);
     }
-}
+  };
+
+  useEffect(() => {
+    async function fetchData() {
+      const storedData = await getLocalData("isLoggedIn");
+      if (storedData) {
+        resetNavigation("Dashboard");
+      } else {
+        resetNavigation("Login");
+      }
+    }
+    fetchData();
+  }, []);
+
+  return <View />;
+};
+
+export default SplashScreen;

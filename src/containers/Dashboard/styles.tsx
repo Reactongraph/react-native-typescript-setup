@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import Common from 'src/utils/common';
+import Common from '../../utils/common';
 
 const styles = StyleSheet.create({
     container: {

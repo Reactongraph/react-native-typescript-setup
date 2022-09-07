@@ -35,12 +35,12 @@ android_library(
 
 android_build_config(
     name = "build_config",
-    package = "com.reactnativetypescriptexample",
+    package = "com.newsamplepoc",
 )
 
 android_resource(
     name = "res",
-    package = "com.reactnativetypescriptexample",
+    package = "com.newsamplepoc",
     res = "src/main/res",
 )
 

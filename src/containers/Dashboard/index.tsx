@@ -1,64 +1,79 @@
-import * as React from 'react';
-import { Component } from 'react';
-import { View, Image, AsyncStorage } from 'react-native';
+import React, {useEffect, useState} from 'react';
+import {View, Image, AsyncStorage} from 'react-native';
 import Swiper from 'react-native-swiper';
-import Header from 'src/components/Header';
+import Header from '../../components/Header';
+import {IMAGEDATA} from '../../utils/constants';
 import styles from './styles';
-import Helper from 'src/utils/helper';
-import { IMAGEDATA } from 'src/utils/constants';
-
-const helperFunctions = new Helper();
 
 interface Props {}
 interface State {
-    email: String;
+  email: String;
 }
-export default class Dashboard extends Component<Props, State> {
-    state = {
-        email: ''
-    };
 
-    async componentDidMount() {
-        const storedData = await helperFunctions.getLocalData('credential');
-        this.setState({ email: storedData.email });
+const Dashboard = props => {
+  const [email, setEmail] = useState('');
+
+  const resetNavigation = (navigation: any) => {
+    props.navigation.navigate(navigation);
+  };
+
+  const storeData = async (key: string, data: string) => {
+    try {
+      await AsyncStorage.setItem(key, data);
+    } catch (error) {
+      console.warn(error);
     }
+  };
 
-    // Logout from app
-    handleLogout = () => {
-        helperFunctions.storeData('isLoggedIn', '');
-        helperFunctions.resetNavigation(this, 'Login', null);
-    };
+  const getLocalData = async (key: string) => {
+    try {
+      const value = await AsyncStorage.getItem(key);
+      if (value) {
+        return JSON.parse(value);
+      }
+    } catch (error) {
+      console.warn(error);
+    }
+  };
 
-    showSwiper = () => {
-        return (
-            <Swiper showsButtons>
-                {IMAGEDATA.map((image, index) => {
-                    return (
-                        <View key={index}>
-                            <Image
-                                source={{ uri: image.src.original }}
-                                style={styles.imageStyle}
-                            />
-                        </View>
-                    );
-                })}
-            </Swiper>
-        );
-    };
+  useEffect(async () => {
+    const storedData = await getLocalData('credential');
+    setEmail(storedData.email);
+  }, []);
 
-    render() {
-        const { email } = this.state;
-        return (
-            <View style={styles.container}>
-                <Header
-                    title={`Welcome ${email}`}
-                    titleTextStyle={styles.titleTextStyle}
-                    wrapperStyle={styles.wrapperStyle}
-                    rightText="Logout"
-                    onPress={this.handleLogout}
-                />
-                <View style={styles.imageDataView}>{this.showSwiper()}</View>
+  const handleLogout = () => {
+    storeData('isLoggedIn', '');
+    resetNavigation('Login');
+  };
+
+  const showSwiper = () => {
+    return (
+      <Swiper showsButtons>
+        {IMAGEDATA.map((image, index) => {
+          return (
+            <View key={index}>
+              <Image
+                source={{uri: image.src.original}}
+                style={styles.imageStyle}
+              />
             </View>
-        );
-    }
-}
+          );
+        })}
+      </Swiper>
+    );
+  };
+
+  return (
+    <View style={styles.container}>
+      <Header
+        title={`Welcome ${email}`}
+        titleTextStyle={styles.titleTextStyle}
+        wrapperStyle={styles.wrapperStyle}
+        rightText="Logout"
+        onPress={handleLogout}
+      />
+      <View style={styles.imageDataView}>{showSwiper()}</View>
+    </View>
+  );
+};
+export default Dashboard;
