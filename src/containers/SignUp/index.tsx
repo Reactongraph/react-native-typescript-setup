@@ -1,60 +1,74 @@
-import React, { Component } from 'react';
-import { View, Text } from 'react-native';
-import Button from 'src/components/Button';
-import Form from 'src/components/Form';
-import Helper from 'src/utils/helper';
-import styles from 'src/containers/Login/styles';
-
-const helperFunctions = new Helper();
+import React, {useState} from 'react';
+import {View, Text, AsyncStorage} from 'react-native';
+import Button from '../../components/Button';
+import Form from '../../components/Form';
+import styles from '../../containers/Login/styles';
 
 interface Props {}
 interface State {
-    email: String;
-    password: String;
+  email: String;
+  password: String;
 }
 
-export default class Login extends Component<Props, State> {
-    state = {
-        email: '',
-        password: ''
-    };
+const Signup = props => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
-    handleSubmitForm = () => {
-        const { email, password } = this.state;
-        if (helperFunctions.validateData(email, password)) {
-            const signUpData = {
-                email,
-                password
-            };
-            helperFunctions.storeData('credential', JSON.stringify(signUpData));
-            helperFunctions.resetNavigation(this, 'Dashboard', null);
-        }
-    };
-    handleLogin = () => {
-        helperFunctions.resetNavigation(this, 'Login', null);
-    };
-
-    render() {
-        return (
-            <View style={styles.container}>
-                <Text style={styles.screenTitle}>SignUp with App</Text>
-                <Form
-                    onEmailChangeText={email => this.setState({ email })}
-                    email={this.state.email}
-                    onPasswordChangeText={password =>
-                        this.setState({ password })
-                    }
-                    onSubmit={this.handleSubmitForm}
-                    password={this.state.password}
-                    buttonText="SignUp"
-                />
-                <Button
-                    onPress={this.handleLogin}
-                    style={styles.buttonContainer}
-                    text="Already have Account"
-                    buttonTextStyle={styles.buttonText}
-                />
-            </View>
-        );
+  const validateData = (email: string, password: string) => {
+    var reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+    if (reg.test(email) === true && password.length > 5) {
+      return true;
     }
-}
+    alert('Invalid email or password length is greater than 5');
+    return false;
+  };
+
+  const resetNavigation = (navigation: any) => {
+    props.navigation.navigate(navigation);
+  };
+
+  const storeData = async (key: string, data: string) => {
+    try {
+      await AsyncStorage.setItem(key, data);
+    } catch (error) {
+      console.warn(error);
+    }
+  };
+
+  const handleSubmitForm = () => {
+    if (validateData(email, password)) {
+      const signUpData = {
+        email,
+        password,
+      };
+      storeData('credential', JSON.stringify(signUpData));
+      resetNavigation('Dashboard');
+    }
+  };
+
+  const handleLogin = () => {
+    resetNavigation('Login');
+  };
+
+  return (
+    <View style={styles.container}>
+      <Text style={styles.screenTitle}>SignUp with App</Text>
+      <Form
+        onEmailChangeText={email => setEmail(email)}
+        email={email}
+        onPasswordChangeText={password => setPassword(password)}
+        onSubmit={handleSubmitForm}
+        password={password}
+        buttonText="SignUp"
+      />
+      <Button
+        onPress={handleLogin}
+        style={styles.buttonContainer}
+        text="Already have Account"
+        buttonTextStyle={styles.buttonText}
+      />
+    </View>
+  );
+};
+
+export default Signup;
